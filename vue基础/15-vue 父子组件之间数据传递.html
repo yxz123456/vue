@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--父组件向子组件传值-->
+    <my-component :data="value"></my-component>
+    <!--子组件向父组件传值 两种方法-->
+    <!-- 1. 把父组件的方法传给子组件，在子组件里调用父组件的方法改变父组件的值-->
+    <my-component :fn="getValue"></my-component>
+    <!-- 2. 自定义一个事件，用父组件的方法。然后在子组件里用$emit触发这个事件即可-->
+    <my-component @changevalue="getValue"></my-component>
+
+</div>
+<script>
+    //全局组件
+    Vue.component("myComponent",{
+        template:`<div>
+                        <button @click="setValue">getFatherValue</button>
+                        <span>{{data}}</span>
+                    </div>`,
+        //数据绑定要用函数返回对象，
+        //组件会被复用，如果所有的组件都用一个对象的数据，那么一个变了，就全变了
+        data:function () {
+            return {
+                num:0
+            }
+        },
+        props:{
+            data:Number,
+            fn:Function
+        },
+        methods:{
+            setValue(){
+                // this.fn(this.num)
+                //$emit可以触发事件，
+                this.$emit("changevalue",this.num);
+            }
+        }
+    })
+
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            value:123
+        },
+        methods:{
+            getValue(val){
+                this.value = val;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

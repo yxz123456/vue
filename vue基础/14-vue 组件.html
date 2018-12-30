@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-elem></my-elem>
+        <!--报错-->
+        <!--<my-elem1></my-elem1>-->
+    </div>
+    <script>
+        //全局组件
+        Vue.component("myComponent",{
+            template:`<div>
+                        <button @click="num++">add</button>
+                        <span>{{num}}</span>
+                    </div>`,
+            //数据绑定要用函数返回对象，
+            //组件会被复用，如果所有的组件都用一个对象的数据，那么一个变了，就全变了
+            data:function () {
+                return {
+                    num:0
+                }
+            }
+        })
+
+        let myElem = {
+            template:`<div>myE</div>`
+        }
+        let myElem1 = {
+            template:`<div>myE</div>`
+        }
+
+        let vm = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            //规定这个vue实例可以用的组件，局部组件
+            components:{
+                myElem,
+
+            }
+        })
+    </script>
+
+</body>
+</html>
