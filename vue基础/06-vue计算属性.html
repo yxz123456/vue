@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="num++">addNum</button>
+    <button @click="n++">addN</button>
+    <p>{{addNum()}}|{{addN1}}</p>
+</div>
+<!--在插值语法中用methods里的方法渲染数据的时候，只要页面变一下，
+所有的方法都会重新执行一次，不管有没有用到，但是computed就不会-->
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            num:0,
+            n:0
+        },
+        methods:{
+           addNum(){
+               console.log("methods");
+               return this.num *10;
+           },
+           addN(){
+               console.log("methods");
+               return this.n;
+           }
+        },
+        //计算属性
+        computed:{
+           addN1(){
+               console.log("computed")
+               return this.n;
+           }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<!-- v-if不满足条件不显示是被注释掉了 完全移出-->
+<!-- v-show 把display属性改成none -->
+<!-- 开始渲染页面的时候判断显不显示用v-if
+ 之后判断要不要显示，看可以用v-show -->
+<div id="app">
+    <p v-if="flag">you can see me</p>
+    <p v-else>you can't see me</p>
+    <p v-show="flag">I can see you too</p>
+    <button @click="flag = !flag">change</button>
+</div>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            flag:false
+        }
+    })
+</script>
+</body>
+</html>

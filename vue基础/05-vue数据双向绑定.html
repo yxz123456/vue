@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-bind:value="msg" @input="changeInfo">
+        <!--双向绑定-->
+        <input type="text" v-model="msg">
+        <p>msg:{{msg}}</p>
+    </div>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            msg:""
+        },
+        methods:{
+            changeInfo(event){
+                this.msg = event.target.value;
+            }
+        }
+
+    })
+
+</script>
+</body>
+</html>

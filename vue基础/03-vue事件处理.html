@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+    <style>
+        .red{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<!--v-on:事件type="fn" 或者 =" JS语句 例如：a++;"-->
+<div id="app" >
+    <button v-on:click="add(3,$event)">+</button>
+    <p>num:{{num}}</p>
+</div>
+
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:"hello",
+                num:0
+            },
+            methods:{
+                add(num,event){
+                    console.log(event);
+                    this.num += num;
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

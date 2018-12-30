@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+    <style>
+        .father{
+            width: 200px;
+            height: 200px;
+            background: #669900;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: #74ACCF;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" >
+        <div class="father" @click="alertMe">
+            <div class="son" @click.stop.prevent="alertMe">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:"hello",
+                num:0
+            },
+            methods:{
+                add(num,event){
+                    console.log(event);
+                    this.num += num;
+                },
+                alertMe(event){
+                    console.log(event.target);
+                    //阻止事件冒泡
+                    // event.stopPropagation();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

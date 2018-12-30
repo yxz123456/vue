@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="../../vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="time-wrapper">
+        <div class="header">
+            <div class="left" @click="prevMonth"></div>
+            <div class="middle">{{year}}年{{month}}月</div>
+            <div class="right" @click="nextMonth"></div>
+        </div>
+        <div class="week">
+            <div>日</div>
+            <div>一</div>
+            <div>二</div>
+            <div>三</div>
+            <div>四</div>
+            <div>五</div>
+            <div>六</div>
+        </div>
+        <div class="date-list">
+            <div class="day" v-for="i in 42">
+                <div v-if="monthFistDay < i && i <= monthMaxDay+monthFistDay"  :class="i-monthFistDay == day && thisYear == year && thisMonth == month ? 'today' : ''">
+                        {{i-monthFistDay}}
+                </div>
+                <div v-else-if="i <= monthFistDay" class="otherDay">
+                    {{prevMonthMaxDay-monthFistDay+i}}
+                </div>
+                <div v-else="" class="otherDay">
+                    {{i-(monthMaxDay+monthFistDay)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            today:null,
+            year:null,
+            month:null,
+            day:null,
+            //第一天是星期几
+            monthFistDay:null,
+            //这个月多少天
+            monthMaxDay:null,
+            //上个月有多少天
+            prevMonthMaxDay:null,
+            //下个月有多少天
+            nextMonthMaxDay:null,
+        },
+        methods:{
+            getToday(date = new Date()){
+                this.year = date.getFullYear();
+                this.month = date.getMonth()+1;
+                this.day = date.getDate();
+                this.thisYear = this.year;
+                this.thisMonth = this.month;
+            },
+            //获得当前日期
+            getDay(date = new Date()){
+                this.year = date.getFullYear();
+                this.month = date.getMonth()+1;
+                this.today = `${this.year}-${this.month}-${this.day}`;
+                this.monthFistDay = date.getDay();
+                this.monthMaxDay = this.countDays(this.year,this.month);
+                this.prevMonthMaxDay = this.countDays(this.year,this.month - 1);
+                this.nextMonthMaxDay = this.countDays(this.year,this.month + 1);
+            },
+            //改变数据
+            initData(year,month){
+                if(month == 0){
+                    month = 12;
+                    year--;
+                }
+                else if(month == 13){
+                    month = 1;
+                    year++;
+                }
+                let date = new Date(Date.parse(`${month}/${1}/${year}`));
+                this.getDay(date);
+
+            },
+            //计算当前年月有多少天
+            countDays(year,month){
+                if(month == 0){
+                    month = 12;
+                    year--;
+                }
+                else if(month == 13){
+                    month = 1;
+                    year++;
+                }
+                if([1,3,5,7,8,10,12].includes(month)){
+                    return 31;
+                }
+                else if([4,6,9,11].includes(month)){
+                    return 30;
+                }
+                else{
+                    if((year%4 == 0 && year%100 != 0) || year%400 == 0){
+                        return 29;
+                    }
+                    return 28;
+                }
+            },
+            prevMonth(){
+                this.initData(this.year,this.month-1);
+            },
+            nextMonth(){
+                this.initData(this.year,this.month+1);
+            }
+        },
+        created(){
+            this.getToday();
+            this.getDay();
+        }
+    })
+</script>
+</body>
+</html>

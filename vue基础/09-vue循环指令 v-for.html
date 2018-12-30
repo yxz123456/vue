@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="item in list">
+            <div v-for="(value,key,index) in item">
+                {{key}}:{{value}}|{{index}}
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            flag:false,
+            list:[
+                {
+                  name:"yxz",
+                  age:21,
+                  sex:"male"
+                },
+                {
+                  name:"ld",
+                  age:20,
+                  sex:"none"
+                },
+
+            ]
+        }
+    })
+</script>
+</body>
+</html>

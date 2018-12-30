@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+    <!--v-text="" 在页面中插入普通文本，优先级高于插值语法-->
+    <!--v-html="" 在页面中插入html标签，优先级高于插值语法-->
+    <!--v-bind:给元素绑定属性-->
+    <!--v-once 让元素只渲染一次-->
+    <div id="app">
+        <input v-bind:type="type">
+        <p v-text="msg">{{name}}</p>
+        <p v-html="html">{{name}}</p>
+        <p v-once>{{name}}</p>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"Hello Vue",
+                name:"张三",
+                type:"password",
+                html:"<li>123<li/>"
+            }
+        })
+    </script>
+</body>
+</html>

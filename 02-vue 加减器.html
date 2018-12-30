@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .wrapper{
+            width: 200px;
+            height: 200px;
+            background: #74ACCF;
+        }
+        .content{
+            width: 100px;
+            height: 100px;
+            background: lime;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <button v-on:click.left="add">+</button>
+        <span>{{val}}</span>
+        <button @click.right.prevent="sub(2,$event)">-</button>
+        <div class="wrapper" @click="show1">
+            <div class="content" @click.stop="show2"></div>
+        </div>
+        <input type="text" @keyup.enter="show" >
+    </div>
+<script>
+    let vm = new Vue({
+       el:'.app',
+       data:{
+           val:0
+       },
+       methods:{
+           add:function(e){
+               this.val++;
+               console.log(e);
+           },
+           sub:function(num,e){
+               this.val -= num;
+               console.log(e);
+           },
+           show:function(e){
+               console.log(e.target.value);
+           },
+
+           show1:function (e) {
+                console.log('父级');
+           },
+           show2:function (e) {
+               console.log('子级');
+           }
+       }
+
+    });
+</script>
+</body>
+</html>

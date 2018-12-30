@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--没绑定key，vue每个li绑定的是索引，只要索引变了，就会重新改变该dom-->
+    <!--绑定了key之后，vue绑定的是每个li dom元素，只需要改变某些dom元素的位置，就能达到效果-->
+    <tamplate v-if="">
+        <!--相当于微信小程序里的 不会再页面中渲染出来，只起到包装的作用-->
+    </tamplate>
+    <ul>
+        <li v-for="item in list" :key="item">{{item}}</li>
+        <li v-for="item in json" :key="item">{{item}}</li>
+    </ul>
+    <button @click="list = [2,3,1,4,5]">change</button>
+    <button @click="changeList">changeList</button>
+</div>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            flag:false,
+            list:[1,2,3,4,5],
+            json:{
+                name:"yxz",
+                age:21,
+                sex:"male"
+            }
+        },
+        methods:{
+            changeList(){
+                console.log("change");
+                //改变不了
+                // this.list[0] = 2;
+                // this.$set(this.list, 0, 2);
+                //改变不了
+                // this.json.college = "whxy";
+                this.$set(this.json,"college","whxy");
+
+            }
+        }
+    })
+</script>
+</body>
+</html>
