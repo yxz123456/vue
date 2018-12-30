@@ -28,7 +28,7 @@
         </div>
         <div class="date-list">
             <div class="day" v-for="i in 42">
-                <div v-if="monthFistDay < i && i <= monthMaxDay+monthFistDay"  :class="i-monthFistDay == day && thisYear == year && thisMonth == month ? 'today' : ''">
+                <div v-if="monthFistDay < i && i <= monthMaxDay+monthFistDay" @click="getThisDay" :data-data="i-monthFistDay"  :class="i-monthFistDay == day && thisYear == year && thisMonth == month ? 'today' : ''">
                         {{i-monthFistDay}}
                 </div>
                 <div v-else-if="i <= monthFistDay" class="otherDay">
@@ -71,7 +71,8 @@
                 this.year = date.getFullYear();
                 this.month = date.getMonth()+1;
                 this.today = `${this.year}-${this.month}-${this.day}`;
-                this.monthFistDay = date.getDay();
+                let date1 = new Date(Date.parse(`${this.month}/${1}/${this.year}`));
+                this.monthFistDay = date1.getDay();
                 this.monthMaxDay = this.countDays(this.year,this.month);
                 this.prevMonthMaxDay = this.countDays(this.year,this.month - 1);
                 this.nextMonthMaxDay = this.countDays(this.year,this.month + 1);
@@ -118,6 +119,9 @@
             },
             nextMonth(){
                 this.initData(this.year,this.month+1);
+            },
+            getThisDay(ev){
+                console.log(`${this.year}-${this.month}-${ev.target.dataset.data}`);
             }
         },
         created(){
