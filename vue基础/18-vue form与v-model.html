@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app" class="container">
+        <form>
+            <h1>个人信息采集</h1>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="userName">UserName:</label>
+                        <input type="text" class="form-control" id="userName" v-model="userName">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email" v-model="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" class="form-control" id="age" v-model="age">
+                    </div>
+                    <div class="form-group">
+                        <label for="info">Info:</label>
+                        <textarea row=3 class="form-control" id="info" v-model="info"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Sex:</label>
+                        <label for="male" class="radio-inline">
+                            <input type="radio" id="male" value="male" v-model="sex">male
+                        </label>
+
+                        <label for="female" class="radio-inline">
+                            <input type="radio" id="female" value="female" v-model="sex">female
+                        </label>
+
+                    </div>
+                    <div class="form-group">
+                        <label>hobby:</label>
+                        <label for="eat" class="check-inline">
+                            <input type="checkbox" id="eat" v-model="hobby" value="eat">eat
+                        </label>
+
+                        <label for="sleep" class="check-inline">
+                            <input type="checkbox" id="sleep"  v-model="hobby" value="sleep">sleep
+                        </label>
+
+                        <label for="cook" class="check-inline">
+                            <input type="checkbox" id="cook"  v-model="hobby" value="cook">cook
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Your Info</div>
+                    <div class="panel-body">
+                        <p>UserName:{{userName}}</p>
+                        <p>Email:{{Email}}</p>
+                        <p>Age:{{age}}</p>
+                        <p>Info:{{info}}</p>
+                        <p>Sex:{{sex}}</p>
+                        <p>hobby:{{hobby.join(",")}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                userName:"yxz",
+                Email:"123@qq.com",
+                age:21,
+                info:"a handsome boy",
+                sex:"male",
+                hobby:["cook"]
+
+            }
+        })
+    </script>
+</body>
+</html>

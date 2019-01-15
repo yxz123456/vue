@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-tree :data="data"/>
+    </div>
+    <script>
+        Vue.component("myTree",{
+            template:`<ul>
+                        <li v-for="(item,index) in data">
+                            <span @click="open(index)">{{item.name}}{{item.children && item.children.length? "文件夹" : "文件"}}</span>
+                            <my-tree v-show="scope[index]" :data="item.children"/>
+                        </li>
+                    </ul>`,
+            props:["data"],
+            data:function(){
+                return {
+                    myScope:[],
+                    scope:[]
+                }
+            },
+            created(){
+                if(this.data){
+                    this.data.forEach((val,index)=>{
+                        if(val.children && val.children.length){
+                            this.$set(this.myScope,index,true);
+                            this.$set(this.scope,index,false);
+                        }
+                        else{
+                            this.$set(this.myScope,index,false);
+                        }
+                    })
+                }
+            },
+            methods:{
+                open(index){
+                    this.$set(this.scope,index,!this.scope[index])
+                }
+            }
+        })
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                data:[
+                    {
+                        "id": 3,
+                        "name": "bbbb",
+                        "children": [
+                            {
+                                "id": 8,
+                                "name": "ggggg",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": 4,
+                        "name": "ccccc",
+                        "children": [
+                            {
+                                "id": 5,
+                                "name": "ddddd",
+                                "children": [
+                                    {
+                                        "id": 9,
+                                        "name": "hhhhh",
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 6,
+                                "name": "eeeee",
+                                "children": [
+                                    {
+                                        "id": 7,
+                                        "name": "ffff",
+                                        "children": []
+                                    },
+                                    {
+                                        "id": 10,
+                                        "name": "jjjj",
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

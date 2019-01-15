@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="com='comA'">A</button>
+        <button @click="com='comB'">B</button>
+        <button @click="com='comC'">C</button>
+        <!--切换的时候并没有被销毁-->
+        <keep-alive>
+            <component :is="com">{{com}}</component>
+        </keep-alive>
+
+    </div>
+    <script>
+        Vue.component("comA",{
+            template:`<div>comA</div>`
+        })
+        Vue.component("comB",{
+            template:`<div>comB</div>`
+        })
+        Vue.component("comC",{
+            template:`<div><input type="text"></div>`,
+            created(){
+                console.log("created");
+            },
+            destroyed(){
+                console.log("destroyed");
+            },
+            //活跃
+            activated(){
+                console.log("activated");
+            },
+            // 失活
+            deactivated(){
+                console.log("deactivated");
+            }
+
+        })
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                value:"",
+                com:"comA"
+            }
+        })
+    </script>
+</body>
+</html>

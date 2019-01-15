@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app" class="container">
+        <input type="text"  @input="userName=$event.target.value" @click="aaa">
+        <p>userName:{{userName}}</p>
+        <input type="checkbox" :checked="flag" @change="flag=!flag">{{flag}}
+        <div class="row">
+            <div class="col-md-6">
+                <my-inp v-model="email" :reg="/@qq.com$/" @clear="clearEmail"></my-inp>
+                <p>email:{{email}}</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        Vue.component("myInp",{
+            template:`<div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email" :value="val" @input="setVal">
+                    </div>`,
+            props:["val","reg","clear"],
+            model:{
+                prop:"val",
+                event:"send"
+            },
+            methods:{
+                setVal(ev){
+                    if(this.reg.test(ev.target.value)){
+                        this.$emit("send",ev.target.value);
+                    }
+                    else{
+                        this.$emit("clear");
+                    }
+
+                }
+            }
+        })
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                userName:"",
+                flag:false,
+                email:"123@qq.com"
+            },
+            methods:{
+                aaa(ev){
+                    console.log(ev);
+                },
+                clearEmail(){
+                    this.email = "";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

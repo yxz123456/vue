@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-component :data="value">
+        Hello
+        <p slot="header">具名插槽</p>
+    </my-component>
+    <my-component1 :title="title" :todos="todo">
+        <div slot="todo" slot-scope="props">{{props.index}}:{{props.item}}</div>
+    </my-component1>
+</div>
+<script>
+    /*
+    普通插槽
+    <slot\>
+    具名插槽
+    <slot name="header">
+    */
+    //全局组件
+    Vue.component("myComponent",{
+        template:`<div>
+                    <slot name="header"/>
+                    <p>{{value}}</p>
+                    <slot/>
+                  </div>`,
+
+        data:function () {
+            return {
+                value:"Hello Vue"
+            }
+        },
+        props:{
+            data:Number,
+            fn:Function
+        }
+    })
+    Vue.component("myComponent1",{
+        template:`<div>
+                    {{title}}
+                    <slot name="todo" v-for="(item,index) in todos" :index="index" :item="item"/>
+                  </div>`,
+
+        data:function () {
+            return {
+                value:"Hello Vue"
+            }
+        },
+        props:{
+            title:String,
+            todos:Array
+        }
+    })
+
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            value:"",
+            title:"工作表",
+            todo:["吃饭","睡觉","打豆豆"]
+        },
+    })
+</script>
+
+</body>
+</html>
