@@ -2,6 +2,7 @@
     <div class="c-wrapper">
         <div>comC</div>
         <input type="text" @input="send">
+        <div>{{ $store.state.value }}</div>
     </div>
 </template>
 
