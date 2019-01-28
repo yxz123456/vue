@@ -11,18 +11,18 @@
 
 <script>
 import myGeo from './geo.vue'
-import myNav from "./nav.vue";
+import myNav from './nav.vue'
 export default {
-    components: {
-        myGeo,
-        myNav
-    }
+  components: {
+    myGeo,
+    myNav
+  }
 }
 </script>
 
 <style lang='scss'>
     @import '@/assets/css/public/header/topbar.scss'
-    
+
 </style>
 <style scoped>
     .m-header{

@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="m-header">
         <el-row>
             <top-bar />
         </el-row>
@@ -11,15 +11,17 @@
 
 <script>
 import topBar from './topBar.vue'
-import searchBar from "./searchBar.vue"
+import searchBar from './searchBar.vue'
 export default {
-    components: {
-        topBar,
-        searchBar
-    }
+  components: {
+    topBar,
+    searchBar
+  }
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss' >
+
     @import '@/assets/css/public/header/index.scss'
+
 </style>
