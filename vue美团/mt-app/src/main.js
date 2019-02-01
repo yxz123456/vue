@@ -10,6 +10,16 @@ import '@/assets/css/main.css'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
+// 注册一个全局自定义指令 `document-click`
+Vue.directive('document-click', {
+  // 绑定的时候调用
+  bind (dom, binding, vNode) {
+    console.log('bind-----', dom, binding, vNode)
+    document.addEventListener('click', binding.value, false)
+  },
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted () {}
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
