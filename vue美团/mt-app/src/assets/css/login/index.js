@@ -10,32 +10,32 @@ const api = {
   getSearchList (params) {
     return axios.get('/meituan/header/search.json', params)
   },
-  getCurPoisition(params) {
+  getCurPoisition (params) {
     return axios.get('/meituan/city/getPosition.json', params)
   },
-  getProvinceList(params) {
+  getProvinceList (params) {
     return axios.get('/meituan/city/province.json', params)
   },
-  getCityList(params){
-      return axios.get('/meituan/city/cityList.json', params)
+  getCityList (params) {
+    return axios.get('/meituan/city/cityList.json', params)
   },
-  getHotCity(params) {
-      return axios.get('/meituan/city/hot.json', params)
+  getHotCity (params) {
+    return axios.get('/meituan/city/hot.json', params)
   },
-  getRecentCity(params) {
-      return axios.get('/meituan/city/recents.json', params)
+  getRecentCity (params) {
+    return axios.get('/meituan/city/recents.json', params)
   },
-  resultsByKeywords(params) {
-      return axios.get('/meituan/index/resultsByKeywords.json', params)
+  resultsByKeywords (params) {
+    return axios.get('/meituan/index/resultsByKeywords.json', params)
   },
-  register(params) {
+  register (params) {
     return axios.get('/meituan/register', params)
   },
-  login(params) {
+  login (params) {
     return axios.get('/meituan/login', {params})
   },
-  getProducts(params) {
-    return axios.get('/meituan/list/goodsList.json');
+  getProducts (params) {
+    return axios.get('/meituan/list/goodsList.json')
   }
 }
 

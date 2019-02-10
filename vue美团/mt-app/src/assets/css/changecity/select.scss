@@ -1,6 +1,9 @@
 .choose-wrap {
     display: inline-block;
     >.choose{
+      &.disabled{
+        cursor: not-allowed;
+      }
         cursor: pointer;
         border-radius: 4px;
         border: 1px solid #E5E5E5;
@@ -37,7 +40,7 @@
           cursor: default;
           top: 45px;
           left: 0;
-          min-width: 265px;
+          min-width: 450px;
           height: 375px;
           padding: 20px 0 20px 15px;
           box-sizing: border-box;

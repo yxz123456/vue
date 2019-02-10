@@ -2,12 +2,12 @@
     <div class="m-geo">
         <div class="position">
             <i class="el-icon-location" />
-            北京
+            {{$store.state.position.name}}
             <router-link class='changeCity' :to="{name:'changeCity'}">切换城市</router-link>
             [
-            <a href="#">大厂回族自治县</a>
-            <a href="#">廊坊</a>
-            <a href="#">固安县</a>
+            <a href="#">孝感</a>
+            <a href="#">仙桃</a>
+            <a href="#">黄石</a>
             ]
         </div>
         <div class="m-user">
@@ -18,8 +18,14 @@
 </template>
 
 <script>
+import api from '@/api/index.js'
 export default {
-
+  created () {
+    api.getCurPosition()
+      .then(res => {
+        console.log('weizhi-------', res)
+      })
+  }
 }
 </script>
 

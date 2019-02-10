@@ -14,6 +14,7 @@
       :value="city"
       title="城市"
       :showWrapperActive="cityActive"
+      :disabled="disabled"
       @change_active="changeCityActive"
       @change_value='changeCityValue'
     />
@@ -38,49 +39,67 @@
 </template>
 
 <script>
-import mySelect from "@/components/changeCity/select.vue";
+import mySelect from '@/components/changeCity/select.vue'
+import api from '@/api/index.js'
 export default {
-  data() {
+  created () {
+    api.getProvinceInfo()
+      .then((res) => {
+        this.provinceList = res.data.data.map((item) => {
+          item.name = item.provinceName
+          return item
+        })
+        console.log(res)
+      })
+  },
+  data () {
     return {
-      province: "省份",
-      provinceList: ["湖北", "湖南", "浙江", "广东", "福建"],
-      city: "城市",
-      cityList: ["孝感", "武汉", "宜昌", "襄阳"],
+      province: '省份',
+      provinceList: ['湖北', '湖南', '浙江', '广东', '福建'],
+      city: '城市',
+      cityList: [],
       provinceActive: false,
       cityActive: false,
-      searchList: ["孝感", "武汉", "宜昌", "襄阳"],
-      searchWord:'',
-      loading:false
-    };
+      searchList: ['孝感', '武汉', '宜昌', '襄阳'],
+      searchWord: '',
+      loading: false,
+      disabled: true
+    }
   },
   components: {
     mySelect
   },
   methods: {
-    changeProvinceActive(flag) {
-      this.provinceActive = flag;
+    changeProvinceActive (flag) {
+      this.provinceActive = flag
       if (flag) {
-        this.cityActive = false;
+        this.cityActive = false
       }
     },
-    changeCityActive(flag) {
-      this.cityActive = flag;
+    changeCityActive (flag) {
+      this.cityActive = flag
       if (flag) {
-        this.provinceActive = false;
+        this.provinceActive = false
       }
     },
-    remoteMethod(val){
-        //请求
-        console.log(e)
+    remoteMethod (val) {
+      // 请求
+
     },
-    changeCityValue(val){
-      this.city = val
+    changeCityValue (item) {
+      this.city = item.name
+      // 改变当前城市数据
+      this.$store.dispatch('setPosition', item)
+      // 跳转到首页
+      this.$router.push({name: 'index'})
     },
-    changeProvinceValue(val){
-      this.province = val
-    },
+    changeProvinceValue (item) {
+      this.province = item.provinceName
+      this.cityList = item.cityInfoList
+      this.disabled = false
+    }
   }
-};
+}
 </script>
 
 <style lang='scss'>

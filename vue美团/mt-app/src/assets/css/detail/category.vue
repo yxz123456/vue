@@ -17,38 +17,36 @@
 <script>
 import api from '@/api/index.js'
 export default {
-    data() {
-        return {
-            list: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-            cityList: [],
-            cityGroup: {},
-        }
-    },
-    created() {
-        api.getCityList().then((res) => {
-            let data = res.data.data;
-            let obj = {};
-            data.forEach((item, index) => {
-                if (!obj[item.firstChar.toUpperCase()]) {
-                    obj[item.firstChar.toUpperCase()] = [];
-                }
-                obj[item.firstChar.toUpperCase()].push(item);
-            });
-            console.log(obj)
-            this.cityGroup = obj;
-        })
-
-    },
-    methods: {
-        changeCity(city) {
-            this.$store.state.position = city;
-            this.$router.push({name: 'index'})
-        }
+  data () {
+    return {
+      list: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+      cityList: [],
+      cityGroup: {}
     }
+  },
+  created () {
+    api.getCityList().then((res) => {
+      let data = res.data.data
+      let obj = {}
+      data.forEach((item, index) => {
+        if (!obj[item.firstChar.toUpperCase()]) {
+          obj[item.firstChar.toUpperCase()] = []
+        }
+        obj[item.firstChar.toUpperCase()].push(item)
+      })
+      console.log(obj)
+      this.cityGroup = obj
+    })
+  },
+  methods: {
+    changeCity (city) {
+      this.$store.state.position = city
+      this.$router.push({name: 'index'})
+    }
+  }
 }
 </script>
 
 <style lang="scss">
     @import "@/assets/css/changecity/categroy.scss";
 </style>
-

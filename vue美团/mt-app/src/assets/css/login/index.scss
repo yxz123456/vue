@@ -106,7 +106,13 @@
       .el-input {
         margin-top: 10px;
       }
-
+      .error{
+        input{
+          border-color:red;
+        }
+        
+      }
+      
       .foot {
         margin-top: 10px;
         a {
@@ -149,11 +155,35 @@
         border: none;
         padding: 12px 15px;
       }
+
+      .btn-bottom{
+        font: 400 14px/1.5 'Hiragino Sans GB','WenQuanYi Micro Hei',tahoma,sans-serif;
+        a{
+          text-decoration: none;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
     }
-    footer {
+    .footer {
       width: 980px;
       margin: 0 auto 30px;
       text-align: left;
+      .copyright {
+        text-align: left;
+        color: #CCC;
+        clear: both;
+        font-size: 12px;
+        font-family: initial;
+        a{
+          text-decoration: none;
+          color: #CCC;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
       ul {
         border-top: 1px solid #EEE;
         border-bottom: 1px solid #EEE;
@@ -169,6 +199,7 @@
           a {
             font-size: 13px;
             color: #999;
+            text-decoration: none;
             &:hover {
               text-decoration: underline;
             }

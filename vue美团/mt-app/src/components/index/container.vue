@@ -11,16 +11,16 @@
     <ul class="ibody">
       <li v-for='(item,index) in cardList' :key="index">
         <el-card :body-style="{ padding: '0px' }" shadow='never'>
-          <img :src="item.imgSrc" class="image">
+          <img :src="item.image" class="image">
           <div class="poi-info cbody" >
             <div class="title" :title="item.title">{{item.title}}</div>
-            <div class="sub-title" :title="item.sub_title">{{item.sub_title}}</div>
+            <div class="sub-title" :title="item.sub_title">{{item.subTitle}}</div>
             <div class="price-info">
               <span class="current-price-wrapper">
                 <span class="price-symbol numfont">¥</span>
-                <span class="current-price numfont">{{item.price_info.current_price}}</span>
+                <span class="current-price numfont">{{item.price}}</span>
               </span>
-              <span class="old-price">门市价¥{{item.price_info.old_price}}</span>
+              <!-- <span class="old-price">门市价¥{{item.price_info.old_price}}</span> -->
               <span class="sold bottom-right-info">{{item.address}}</span>
             </div>
           </div>
@@ -31,59 +31,31 @@
 </template>
 
 <script>
+import api from '@/api/index.js'
 export default {
+  created () {
+    api.getStyleInfo()
+      .then((res) => {
+        this.list = res.data.data
+        this.cardList = res.data.data.all
+        console.log('style---------', res)
+      })
+  },
   data () {
     return {
-      kind: '',
-      cardList: [{
-        imgSrc: '//p0.meituan.net/mogu/1bd275022a228dcb91e0a81e93980c2f189699.jpg@460w_260h_1e_1c',
-        title: '分米鸡 DM Chicken（爱琴海店）',
-        sub_title: '分米鸡5.0DM套餐1份',
-        price_info: {
-          current_price: 168,
-          old_price: 208
-        },
-        address: '太阳宫'
-      },
-      {
-        imgSrc: '//p0.meituan.net/mogu/1bd275022a228dcb91e0a81e93980c2f189699.jpg@460w_260h_1e_1c',
-        title: '分米鸡 DM Chicken（爱琴海店）',
-        sub_title: '分米鸡5.0DM套餐1份',
-        price_info: {
-          current_price: 168,
-          old_price: 208
-        },
-        address: '太阳宫'
-      },
-      {
-        imgSrc: '//p0.meituan.net/mogu/1bd275022a228dcb91e0a81e93980c2f189699.jpg@460w_260h_1e_1c',
-        title: '分米鸡 DM Chicken（爱琴海店）',
-        sub_title: '分米鸡5.0DM套餐1份',
-        price_info: {
-          current_price: 168,
-          old_price: 208
-        },
-        address: '太阳宫'
-      },
-      {
-        imgSrc: '//p0.meituan.net/mogu/1bd275022a228dcb91e0a81e93980c2f189699.jpg@460w_260h_1e_1c',
-        title: '分米鸡 DM Chicken（爱琴海店）',
-        sub_title: '分米鸡5.0DM套餐1份',
-        price_info: {
-          current_price: 168,
-          old_price: 208
-        },
-        address: '太阳宫'
-      }]
+      kind: 'all',
+      list: [],
+      cardList: []
     }
   },
   methods: {
     over (e) {
       let dom = e.target
-      if (dom.tagName.toLowerCase() != 'dd') {
+      if (dom.tagName.toLowerCase() !== 'dd') {
         return false
       }
       this.kind = dom.getAttribute('data-type')
+      this.cardList = this.list[this.kind]
     }
   }
 }

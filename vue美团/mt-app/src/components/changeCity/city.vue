@@ -3,7 +3,7 @@
         <dl>
             <dt>{{title}}：</dt>
             <dd v-for='(item,index) in list' :key="index">
-                {{item}}
+                {{item.name}}
             </dd>
         </dl>
     </div>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    props:['title','list']
+  props: ['title', 'list']
 }
 </script>
 
